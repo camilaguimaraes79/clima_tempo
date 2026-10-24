@@ -1,17 +1,17 @@
-# clima_tempo
+# Projeto Clima
 
-A new Flutter project.
+## Diferença entre Expanded e Flexible
 
-## Getting Started
+O `Expanded` faz o widget ocupar o espaço disponível dentro de uma `Row` ou `Column`.
 
-This project is a starting point for a Flutter application.
+O `Flexible` permite que o widget utilize o espaço disponível sem obrigatoriamente ocupar todo esse espaço.
 
-A few resources to get you started if this is your first Flutter project:
+## O que acontece quando usamos valores diferentes de flex?
 
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
+O valor de `flex` define a proporção do espaço disponível que cada widget recebe em relação aos outros widgets flexíveis.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Por exemplo, quando usamos `Expanded` com `flex: 1` e `Flexible` com `flex: 2`, o segundo widget pode receber uma proporção duas vezes maior do espaço disponível que o primeiro, considerando o espaço distribuído entre eles.
+
+## Conclusão
+
+`Expanded` é usado quando queremos que o widget ocupe o espaço disponível. `Flexible` permite maior flexibilidade na ocupação desse espaço. Os valores de `flex` controlam a proporção de espaço distribuída entre os widgets.

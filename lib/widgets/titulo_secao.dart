@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 class TituloSecao extends StatelessWidget {
@@ -10,10 +9,10 @@ class TituloSecao extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       titulo,
-      style: TextStyle(
+      style:  TextStyle(
         fontSize: 20,
         fontWeight: FontWeight.bold,
-        color: Colors.blue,
+        color: Colors.teal,
       ),
     );
   }
