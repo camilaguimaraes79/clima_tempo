@@ -1,15 +1,21 @@
 import 'package:flutter/material.dart';
+
+import '../models/cidade.dart';
+import '../widgets/item_previsao_dia.dart';
 import '../widgets/titulo_secao.dart';
 
+// Tela única: mostra a previsão da semana de QUALQUER cidade recebida.
 class PrevisaoSemanaScreen extends StatelessWidget {
- const PrevisaoSemanaScreen({super.key});
+  final Cidade cidade;
+
+  const PrevisaoSemanaScreen({super.key, required this.cidade});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Previsão da semana')),
+      appBar: AppBar(title: Text('Previsão da semana - ${cidade.nome}')),
       body: ListView(
-        padding:  EdgeInsets.all(16),
+        padding: EdgeInsets.all(16),
         children: [
           TituloSecao(titulo: 'Faixa de temperatura'),
           Row(
@@ -18,7 +24,7 @@ class PrevisaoSemanaScreen extends StatelessWidget {
                 child: Container(
                   height: 60,
                   color: Colors.lightBlue.shade200,
-                  child: Center(child: Text('18°C')),
+                  child: Center(child: Text(cidade.minima)),
                 ),
               ),
               Flexible(
@@ -26,14 +32,14 @@ class PrevisaoSemanaScreen extends StatelessWidget {
                 child: Container(
                   height: 60,
                   color: Colors.amber.shade300,
-                  child: Center(child: Text('26°C')),
+                  child: Center(child: Text(cidade.faixaMedia)),
                 ),
               ),
               Expanded(
                 child: Container(
                   height: 60,
                   color: Colors.deepOrange.shade300,
-                  child: Center(child: Text('31°C')),
+                  child: Center(child: Text(cidade.maxima)),
                 ),
               ),
             ],
@@ -48,14 +54,14 @@ class PrevisaoSemanaScreen extends StatelessWidget {
                 Expanded(
                   child: Container(
                     color: Colors.lightGreen.shade200,
-                    child: Center(child: Text('Manhã: 20°C')),
+                    child: Center(child: Text('Manhã: ${cidade.manha}')),
                   ),
                 ),
                 Flexible(
                   flex: 2,
                   child: Container(
                     color: Colors.orange.shade200,
-                    child: Center(child: Text('Tarde: 29°C')),
+                    child: Center(child: Text('Tarde: ${cidade.tarde}')),
                   ),
                 ),
               ],
@@ -63,59 +69,12 @@ class PrevisaoSemanaScreen extends StatelessWidget {
           ),
           Divider(),
           TituloSecao(titulo: 'Próximos dias'),
-          Padding(
-            padding: EdgeInsets.symmetric(vertical: 8),
-            child: Row(
-              children: [
-                Expanded(flex: 2, child: Text('Sexta')),
-                Icon(Icons.wb_sunny, size: 28),
-                Expanded(child: Text('19°C')),
-                Expanded(child: Text('30°C')),
-              ],
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.symmetric(vertical: 8),
-            child: Row(
-              children: [
-                Expanded(flex: 2, child: Text('Sábado')),
-                Icon(Icons.cloud, size: 28),
-                Expanded(child: Text('18°C')),
-                Expanded(child: Text('27°C')),
-              ],
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.symmetric(vertical: 8),
-            child: Row(
-              children: [
-                Expanded(flex: 2, child: Text('Domingo')),
-                Icon(Icons.umbrella, size: 28),
-                Expanded(child: Text('17°C')),
-                Expanded(child: Text('24°C')),
-              ],
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.symmetric(vertical: 8),
-            child: Row(
-              children: [
-                Expanded(flex: 2, child: Text('Segunda')),
-                Icon(Icons.cloud, size: 28),
-                Expanded(child: Text('16°C')),
-                Expanded(child: Text('25°C')),
-              ],
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.symmetric(vertical: 8),
-            child: Row(
-              children: [
-                Expanded(flex: 2, child: Text('Terça')),
-                Icon(Icons.wb_sunny, size: 28),
-                Expanded(child: Text('18°C')),
-                Expanded(child: Text('29°C')),
-              ],
+          ...cidade.proximosDias.map(
+            (dia) => ItemPrevisaoDia(
+              dia: dia.dia,
+              icone: dia.icone,
+              minima: dia.minima,
+              maxima: dia.maxima,
             ),
           ),
         ],

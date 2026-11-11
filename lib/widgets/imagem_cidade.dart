@@ -25,6 +25,8 @@ class ImagemCidade extends StatelessWidget {
               child: Image.network(
                 url,
                 fit: BoxFit.cover,
+                // Única linha nova: evita o bloqueio de CORS no Chrome.
+                webHtmlElementStrategy: WebHtmlElementStrategy.prefer,
                 errorBuilder: (context, erro, stackTrace) {
                   return Container(color: Colors.lightBlue.shade200);
                 },
